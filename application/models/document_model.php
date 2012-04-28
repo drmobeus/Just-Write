@@ -74,7 +74,8 @@ class Document_model extends CI_Model
 
             // Update the row
             $this->db->where( 'user_id', $this->get_user_id() );
-            $this->db->where( 'id', $data['id'] );
+            // DBS experiment wit line below $this->db->where( 'id', $data['id'] );
+             $this->db->where( 'title', $data['title'] );
             $update = $this->db->update('documents', $store_document_insert_data);
         }
 
@@ -133,17 +134,29 @@ class Document_model extends CI_Model
      */
     function delete_document( $data )
     {
+    /**
+    * When you publish, and at other times, 
+    * the most recent doc gets deleted somehow, and the middle
+    * doc gets a new id and is duplicated.
+    * Disabling delete until this is sorted.
+    *
+    * to fix - look at load_last_open_document()
+    * get all docs with duplicate titles.
+    * loop through results and delete all but the most recent.
+    * do this .. when?
+    */
         $this->db->where( 'id', $data['id'] );
         $query = $this->db->delete( 'documents' );
-
+    
         if( $query )
         {
             return true;
         }
-        else
+       else
         {
             return false;
         }
+
     }
 
     /**

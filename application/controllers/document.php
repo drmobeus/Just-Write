@@ -212,12 +212,17 @@ class Document extends CI_Controller {
         {
             $content = $this->security->xss_clean( $_POST['content'] );
             $title   = $this->security->xss_clean( $_POST['title'] );
+                     //below line was taken from inside array
+                     //'content' => SmartyPants(markdown( $content ))
+            $contentout = $this->mmd();
 
             $this->load->helper( 'markdown' );
+            $this->load->helper( 'smartypants' );
+            
             $doc = array(
                 'id'      => $_POST['id'],
                 'title'   => '<h1>' . $title . '</h1>',
-                'content' => markdown( $content )
+                'content' => $contentout  
             );
 
             $this->load->model( 'document_model' );
@@ -272,7 +277,8 @@ class Document extends CI_Controller {
      * it returns false.
      *
      * Returns json encoded array of the just
-     * published document.
+     * published document. //SmartyPants(markdown( $content ))
+     * perhaps php-typography should also be a cgi service?
      */
     function publish()
     {
@@ -281,11 +287,22 @@ class Document extends CI_Controller {
             $content = $this->security->xss_clean( $_POST['content'] );
             $title   = $this->security->xss_clean( $_POST['title'] );
 
+            $contentout = $this->mmd();
+
             $this->load->helper( 'markdown' );
+            $this->load->helper( 'smartypants' );
+            
+            include('/home/clocky/webapps/justwrite/php-typography/php-typography.php');
+            $typo = new phpTypography();
+            $typo->set_hyphenation_language("en-GB");
+            $typo->set_diacritic_language("en-GB");
+            $contentout = $typo->process($contentout);
+            
+                        
             $doc = array(
                 'id'      => $_POST['id'],
                 'title'   => $title,
-                'content' => markdown( $content )
+                'content' => $contentout 
             );
 
             $this->load->model( 'document_model' );
@@ -299,6 +316,25 @@ class Document extends CI_Controller {
         {
             return false;
         }
+    }
+    
+    /**
+    *
+    *
+    */
+    function mmd()
+    {
+      if( $_POST && $_POST['content'])
+      {
+         $content = $this->security->xss_clean( $_POST['content'] );
+         file_put_contents('/home/clocky/mmd/peg-multimarkdown/mmd-temp.txt', $content);
+         $output = file_get_contents('http://clocky.webfactional.com/justwrite/mmd.cgi');
+         //putenv('PATH='. getenv('PATH') .':/home/clocky/bin');
+         //exec('multimarkdown /home/clocky/mmd/peg-multimarkdown/mmd-temp.txt 2>&1', $output);
+         //escapeshellcmd("multimarkdown --output=/home/clocky/mmd/peg-multimarkdown/mmd-temp2.txt /home/clocky/mmd/peg-multimarkdown/mmd-temp.txt");
+         //$output = file_get_contents('/home/clocky/mmd/peg-multimarkdown/mmd-temp2.txt');
+         return $output;
+      }
     }
 
 }
