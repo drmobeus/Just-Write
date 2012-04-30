@@ -8,14 +8,15 @@
 
 /* - Generic Styles */
 
-/* | Generic Scrollbar */
-::-webkit-scrollbar { width: 7px; padding-left:20px; }
-::-webkit-scrollbar-track { background-color:#EBEBEB; border-radius:12px; }
-::-webkit-scrollbar-thumb { background-color:#C4C4C4; border-radius:12px; }
+/* | Generic Scrollbar */  
+[if ! SafMob]::-webkit-scrollbar {  width: 7px; padding-left:20px; }
+[if ! SafMob]::-webkit-scrollbar-track { background-color:#EBEBEB; border-radius:12px; }
+[if ! SafMob]::-webkit-scrollbar-thumb {background-color:#C4C4C4; border-radius:12px; }
+
 
 /*   |- Dark Theme */
-.dark ::-webkit-scrollbar-track { background-color:#363636; }
-.dark ::-webkit-scrollbar-thumb { background-color:#575757; }
+[if ! SafMob] .dark ::-webkit-scrollbar-track { background-color:#363636; }
+[if ! SafMob] .dark ::-webkit-scrollbar-thumb { background-color:#575757; }
 
 /* | Generic Form */
 .generic-form input[type="text"], .generic-form input[type="password"] {
@@ -182,13 +183,13 @@
 
 /* | Published Document */
 #published-document { background-color:#FAFAFA; }
-#published-document img { max-width:100%; height:auto; }
+#published-document img { max-width:100%; height:auto;}
 /*   |- Footer */
 #published-document .generic-meta a { font-weight:bold; }
 .back-to-editor { width:650px; margin:0 auto; margin-bottom:1em; }
 
 /* | Control bar for writer view */
-#main-menu { position:fixed; }
+#main-menu { position:fixed;}
 
 #control-bar {
   padding:10px 40px;
@@ -210,7 +211,7 @@
 #doc-link { position:relative; }
 #doc-link img { vertical-align:-4px; margin-right:20px; } 
 
-#document-controls { background-color:#FCFCFC; overflow:hidden; padding:5px; float:left; width:100%; margin:0; }
+#document-controls {background-color:#FCFCFC; overflow:hidden; padding:5px; float:left; width:100%; margin:0; }
 .dark #document-controls { background-color:#454545; }
 #document-controls li { display:block; float:left;  text-decoration:none; margin-right:10px; height:auto; }
 .block li { float:none!important; }
@@ -299,10 +300,10 @@
   background:-webkit-gradient(linear, left top, left bottom, from(#4F4F4F), to(#404040));
 }
 #export li { display:block; box-shadow: 0 0 5px #828282; border-radius:5px; }
-#export a  { display:block; background:#fff; padding:10px 20px; border-bottom: 1px dashed #E8E8E8; }
+#export a  { display:block; background:#fff; padding:10px 20px; border-bottom: 1px dashed #E8E8E8;}
 .markdown-to-html { border-radius:5px 5px 0 0; }
-.publish { border-radius:0 0 5px 5px; border-bottom:none!important; }
-#export-options { float:right; margin:0; }
+.publish { border-radius:0 0 5px 5px; border-bottom:none!important;}
+#export-options { float:right; margin:0;}
 
 
 .edit a{
@@ -346,13 +347,14 @@
   box-shadow: 0px 0px 10px #1881CC;
 }
 
-/* | Document textarea */
-#document-container { padding:70px 40px 50px 40px; background-color:#FCFCFC; }
+/* | Document textarea padding:70px 40px 50px 40px;*/
+#document-container {  padding:70px 40px 50px 40px;background-color:#FCFCFC; } 
 .dark #document-container { background:#2B2B2B; } /* Dark Theme */
-#document { width:90%; margin:0 auto; border:none; display:block; height:1000px; background:transparent; resize:none; padding:0 30px; }
+#document {background:#2B2B2B; 
+width:90%; margin:0 auto; border:none; display:block; height:1000px; background:transparent; resize:none; padding:0 30px;}
 #document:focus { outline:none; }
-
-
+/*#document:hover { overflow:auto; -webkit-overflow-scrolling: touch;} 
+*/
 /* | Logout/login */
 #app-controls { position:absolute; bottom:15px; width:94%; padding:0 3%; }
 #app-controls li { list-style:none; }
@@ -408,10 +410,15 @@ div.edit { margin-top:20px; }
 #settings-wrap { position:relative; margin:40px 0 0 40px; }
 #settings li { list-style:none; }
 
-/* | Ads */
-.ad { width:120px; position:absolute; top:50%; left:40px; }
+/* | Ads    */
+.ad { width:120px; 
+      position:absolute;
+      [if ! SafMob] top:50%; 
+      [if ! SafMob] left:40px; 
+      [if SafMob] valign:bottom;
+      }
 
-/* Mobile Styles */
+/* Mobile Styles */ 
 @media only screen and (max-width : 480px) {
 
   /* Document list */

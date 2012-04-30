@@ -11,6 +11,7 @@
   }
 
 ?>
+<div>
 <nav id="main-menu">
   <ul id="document-controls">
     <li>Recent Documents</li>
@@ -78,8 +79,9 @@
     </li>
   </ul>
 </nav>
+</div>
 
-<section id="document-container">
+ <section id="document-container"> 
   <textarea class="<?php echo $id; ?>" id="document" name="document" tabindex="2"><?php echo html_entity_decode( $document, ENT_QUOTES, "UTF-8" ); ?></textarea>
 </section>
 
@@ -104,4 +106,5 @@
     </li>
   </ul>
 </nav>
+
 <?php endif; ?>

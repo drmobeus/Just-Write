@@ -9,21 +9,32 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="<?php echo base_url(); ?>resources/imgs/favicon.ico" /> 
 
+ <style type="text/css">
+   @import "<?php echo base_url(); ?>resources/css/c-css.php";
+</style>
+
   <!-- Stylesheets -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/style.css" type="text/css" media="screen">
   <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/jquery.fancybox-1.3.4.css" type="text/css" media="screen">
 
   <!-- jQuery; other scripts are located at the bottom of the page -->
-  <script src="<?php echo base_url(); ?>resources/js/jquery-1.6.1.min.js" type="text/javascript"></script>
+  <!-- <script src="<?php echo base_url(); ?>resources/js/jquery-1.6.1.min.js" type="text/javascript"></script>
+  -->
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript"></script>
+  <!--<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js" type="text/javascript"></script>
+  -->
   <!--[if lt IE 9]>
   <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+
+  
 
   <!-- Humans -->
   <link rel="author" href="<?php echo base_url(); ?>humans.txt" />
 
   <!-- iPhone Viewport Size -->
-  <meta name="viewport" content="width=device-width, user-scalable=no" />
+ <meta name="viewport" content="width=device-width, user-scalable=no" />
+ <!-- <meta name="viewport" content="width=device-width, initial-scale=1" />  -->
 
 
   <!-- Google Analytics -->
@@ -43,7 +54,7 @@
 </head>
 <?php
   
-  if( isset( $settings ) )
+  if( isset( $settings->theme ) )
   {
     if( $settings->theme == 1 )
     {

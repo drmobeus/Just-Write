@@ -1,14 +1,14 @@
 $(document).ready(function(){
 
   // Set global variables
-  var local = true;
+  var local = false;
 
   if( local == true ) {
-    var siteUrl = 'http://localhost/24hr-writing-webapp/';
-    var baseUrl = 'http://localhost/24hr-writing-webapp/';
+    var siteUrl = 'http://localhost/justwrite/';
+    var baseUrl = 'http://localhost/justwrite/';
   } else {
-    var siteUrl = 'http://write.ralphsaunders.co.uk/';
-    var baseUrl = 'http://write.ralphsaunders.co.uk/';
+    var siteUrl = 'http://clocky.webfactional.com/justwrite/index.php/';
+    var baseUrl = 'http://clocky.webfactional.com/justwrite/';
   }
 
   function inputPrep() {
@@ -29,6 +29,8 @@ $(document).ready(function(){
   }
 
   inputPrep();
+  
+
 
   // Sets widths + heights for the navigation and document 
   var currentWidth = $( '#control-bar' ).width( $( window ).width() - 73 );
@@ -41,6 +43,43 @@ $(document).ready(function(){
     $( '#document' ).height( $( window ).height() - 120 );
     $( '.generic-code' ).height( $( window ).height() - 120 );
   })
+
+
+  // tweak css if in ios device.. (DBS)
+  if((navigator.userAgent.match(/iPhone/i)) || 
+   (navigator.userAgent.match(/iPod/i))|| 
+   (navigator.userAgent.match(/iPad/i)))
+   {
+   //alert('Hi, you\'re browsing from an iOS device.');
+       // $( '.ad' ).removeClass('top');
+       // $( '.ad' ).removeClass('left');
+       // $( '.ad' ).css( {'valign':'bottom'} ); 
+    $( '#main-menu' ).css( {'z-index':'999'} ); 
+    $( '#main-menu' ).css( {'valign':'top'} ); 
+    $('#document').hover(
+                function () {$(this).css({'-webkit-overflow-scrolling':'touch'});
+                             $('#document-container').css({'padding-top': '0px'} );
+                             $( '#document' ).css({'padding-top': '70px'} );
+                             $( '#main-menu' ).css( {'top':'0px'} );
+                             
+                             $( '#document' ).ontouchmove = function(e) {e.stopPropagation();};
+                                 currentWidth = $( '#control-bar' ).width( $( window ).width() - 73 );
+    $( '#document' ).height( $( window ).height() - 120 );
+    $( '.generic-code' ).height( $( window ).height() - 120 );
+    //$( '-webkit-scrollbar' ).css({'display': 'none'});
+      // $( '#document-container' ).removeClass('-webkit-scrollbar-track');
+  //  $( 'html' ).removeClass('-webkit-scrollbar-thumb');
+
+                             }, 
+                function () {$(this).removeClass('-webkit-overflow-scrolling');
+                             $('#document-container').css({'padding-top': '70px'} );
+                             $( '#document' ).css({'padding-top': '0px'} );
+                                 currentWidth = $( '#control-bar' ).width( $( window ).width() - 73 );
+    $( '#document' ).height( $( window ).height() - 120 );
+    $( '.generic-code' ).height( $( window ).height() - 120 );
+                             }
+                        );
+    } 
 
   // Hides message on signup form
   $( '.generic-form .message' ).hide();

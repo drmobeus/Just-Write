@@ -1,7 +1,8 @@
 <section class="container">
   <div id="login-form" class="generic-form">
     <?php
-      echo form_open('session/validate_credentials');
+    
+      echo form_open('index.php/session/validate_credentials');
       echo form_label('Username:', 'username');
       echo form_input('username', 'Username');
       echo form_label('Password:', 'password');
@@ -9,7 +10,7 @@
       
       echo form_submit('submit', 'Login');
       
-      echo anchor( 'member/forgot_password', 'Forgot Password', 'class="left"' );
+      echo anchor( 'index.php/member/forgot_password', 'Forgot Password', 'class="left"' );
     ?>
     </form>
     <?php if( isset( $error ) ): ?>
